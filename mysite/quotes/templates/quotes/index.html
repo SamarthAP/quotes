@@ -11,8 +11,8 @@
         Name:<br>
             <input list="names" name="name" required>
             <datalist id="names" placeholder="Name">
-            {% for quote in quote_list %}
-                <option value="{{ quote.person }}">
+            {% for person in view.people %}
+                <option value="{{ person.name }}">
             {% endfor %}
             </datalist>
         <br><br>

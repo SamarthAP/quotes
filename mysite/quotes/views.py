@@ -12,20 +12,29 @@ class IndexView(generic.ListView):
     template_name = 'quotes/index.html'
     context_object_name = 'quote_list'
 
+    def people(self):
+        return Person.objects.all()
+
     def post(self, request):
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
             # print("----")
             # print(request.POST['quote'])
             # print(type(request))
-            person = Person(name=request.POST['name'])
-            person.save()
-            quote = Quote(person=person, text=request.POST['quote'], date=timezone.localtime())
-            quote.save()
+            name = request.POST['name']
+            text = request.POST['quote']
+            if Person.objects.filter(name=name).exists():
+                print('exists')
+                quote = Quote(person=Person.objects.get(name=name), text=text, date=timezone.localtime())
+                quote.save()
+            else:
+                print('doenst exist')
+                person = Person(name=request.POST['name'])
+                person.save()
+                quote = Quote(person=person, text=text, date=timezone.localtime())
+                quote.save()
             #print(quote)
             #print(timezone.localtime())
-            
-
         # if a GET (or any other method) we'll create a blank form
         else:
             form = QuoteForm()
