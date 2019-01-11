@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>To-Do lists</title>
+    </head>
+    <body>
+        <h1>Add a quote</h1>
+        <form method="POST", action="submit/">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit">
+        </form>
+        <ul>
+        {% for quote in quote_list %}
+            <li>{{ quote }}</li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>

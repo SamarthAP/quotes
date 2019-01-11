@@ -4,7 +4,7 @@
     </head>
     <body>
         <h1>Add a quote</h1>
-        <form method="POST", action="ACTION NEEDED">
+        <form method="POST", action="""">
         {% csrf_token %}
         Quote:<br>
             <input name="quote" id="quote" placeholder="Enter a quote" required><br>
@@ -12,7 +12,7 @@
             <input list="names" name="name" required>
             <datalist id="names" placeholder="Name">
             {% for quote in quote_list %}
-                <option value="{{ quote.person }}"">
+                <option value="{{ quote.person }}">
             {% endfor %}
             </datalist>
         <br><br>
