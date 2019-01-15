@@ -18,9 +18,6 @@ class IndexView(generic.ListView):
     def post(self, request):
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
-            # print("----")
-            # print(request.POST['quote'])
-            # print(type(request))
             name = request.POST['name']
             text = request.POST['quote']
             if Person.objects.filter(name=name).exists():
@@ -33,24 +30,8 @@ class IndexView(generic.ListView):
                 person.save()
                 quote = Quote(person=person, text=text, date=timezone.localtime())
                 quote.save()
-            #print(quote)
-            #print(timezone.localtime())
         # if a GET (or any other method) we'll create a blank form
         else:
             form = QuoteForm()
 
         return redirect(reverse_lazy('quotes:index'))        
-
-# def submit(request):
-#     # if this is a POST request we need to process the form data
-#     if request.method == 'POST':
-#         quote = request.POST['quote']
-#         name = request.POST['name']
-#         print("----")
-#         print(request.POST['quote'])
-#         print(type(request))
-#     # if a GET (or any other method) we'll create a blank form
-#     else:
-#         form = QuoteForm()
-
-#     return redirect(home)

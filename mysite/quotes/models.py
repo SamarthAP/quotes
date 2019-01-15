@@ -1,5 +1,6 @@
 from django.db import models
 
+# python manage.py migrate --run-syncdb this is important if django can't find tables
 class Person(models.Model):
     name = models.CharField(max_length=200, default='NA')
 
